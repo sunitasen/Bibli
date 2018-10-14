@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "My first extension",
+  "version": "1.0",
+
+
+  "description": "Lets do it",
+  "icons":{
+    "128":"./images/get_started128.png"
+  },
+  "content_scripts":[
+    {  "matches":["*://*/*"],
+      "js":["content.js"] 
+    }
+  ]
+  ,
+  
+
+  "permissions": ["activeTab","declarativeContent","storage","*://*/*"],
+  
+  "browser_action":{
+    "default_title":"example",
+    "default_popup":"popup.html"
+  }
+}
