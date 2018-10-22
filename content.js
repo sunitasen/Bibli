@@ -1,4 +1,4 @@
-console.log('nacho')
+console.log('its working');
 
 var coloraft = '#f7ecd2';
 var colormorn = '#e5e0cc';
@@ -10,22 +10,11 @@ var rest = '#ddad5f';
 var color ;
 document.body.style.backgroundColor = color;
 
-
-
-// detectDivChanges() {
-//   var div = document.querySelector('.mydiv');
-//   var config = { attributes: true, childList: true, subtree: true };
-//   var observer = new MutationObserver((mutation) => {
-//     console.log("div style changed");
-//   })
-//   observer.observe(div, config);
-// }
-// }
 var today = new Date();
 var time = Number(today.getHours());
 
 
-console.log((time));
+//console.log((time));
 if(time>=4 && time<12){
   color = colormorn;
 }else if(time>=12  && time<17){
@@ -43,34 +32,45 @@ if(time>=4 && time<12){
 }
 
 var nodelist = document.querySelectorAll("div");
+
 var links  = document.querySelectorAll("a");
-var observer = new MutationObserver(function(mutation){
-
-  document.getElementsByTagName("div").style.setProperty('background',color,'important');
-  document.getElementsByTagName("a").style.setProperty('color',"#000000",'important');
-  document.getElementsByTagName("div").style.setProperty('color',"#000000",'important');
-
-  document.body.style.setProperty('backgroundColor',color,'important');
-  document.body.style.setProperty('color',"#000000",'important');
-  document_observer.disconnect();
-
-});
-
-// var observer = { attributes: true, childList: true, subtree: true };
-observer.observe(document, {
-  attributes: true,
-  subtree: true,
-  attributeFilter: ['class']
-});
-
-// observer.observe(nodelist, config);
-
 
 for(var i=0;i<nodelist.length;++i){
-  nodelist[i].style.backgroundColor = color;
-  nodelist[i].style.color = "#000000";
+    nodelist[i].style.backgroundColor = color;
+    nodelist[i].style.color = "#000000";
+  }
+  
+for(var i=0;i<links.length;++i){
+links[i].style.color = "#000000";
 }
 
-for(var i=0;i<links.length;++i){
-  links[i].style.color = "#000000";
-}
+var mutationObserver = new MutationObserver(function(mutations) {
+  mutations.forEach(function(mutation) {
+    let value = mutation.target;
+    if($(value).hasClass("paged_list_wrapper")){
+      let save = value;
+      let numberofchild = save.childElementCount;
+      var child = save.childNodes;
+      //console.log(child[0].style.backgroundColor)   
+      for(let i=0;i<numberofchild;++i){
+
+        child[i].style.backgroundColor = color;
+        $(child[i]).find("*").css("background-color", color);
+        $(child[i]).find("*").css("color","#000000" );
+        child[i].style.setProperty('background-color',color,'important');
+        //child[i].style.setProperty('cssText','back','important');
+        console.log(child[i]);
+
+      }      
+    }
+  });
+});
+
+mutationObserver.observe(document.documentElement, {
+  attributes: true,
+  characterData: true,
+  childList: true,
+  subtree: true,
+  attributeOldValue: true,
+  characterDataOldValue: true
+});
