@@ -19,4 +19,4 @@ Here is what Bibli will do for you->
 
 These was just a demo, Bibli can do much more!
 
-                >made for the love of Quora :heart:
+                >made for the love of Quora :heart_eyes:
