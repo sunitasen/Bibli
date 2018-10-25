@@ -43,23 +43,44 @@ for(var i=0;i<nodelist.length;++i){
 for(var i=0;i<links.length;++i){
 links[i].style.color = "#000000";
 }
-
+// console.log(document.location.pathname)
 var mutationObserver = new MutationObserver(function(mutations) {
   mutations.forEach(function(mutation) {
     let value = mutation.target;
+    
     if($(value).hasClass("paged_list_wrapper")){
       let save = value;
       let numberofchild = save.childElementCount;
       var child = save.childNodes;
-      //console.log(child[0].style.backgroundColor)   
+   
       for(let i=0;i<numberofchild;++i){
+        
+        //remove those annoying ads! removed shares even! those are irrelevant and annoying
+        if(($(child[i]).find("*").hasClass("AnswerStoryBundle"))===false && 
+          ($(child[i]).find("*").hasClass("AskQuestionPromptBundle"))===false &&
+          ($(child[i]).find("*").hasClass("QuestionStoryBundle"))===false &&
+          ($(child[i]).find("*").hasClass("SuggestedUsersBundle"))===false &&
+          ($(child[i]).find("*").hasClass("SuggestedTopicsBundle"))===false &&
+          document.location.pathname =="/"
+        ){  
+          $(child[i]).remove();
+          continue;
+        }
 
+        //console.log(child[i])
+
+        $(child[i]).css("border","solid black 2px");
+
+        // if($(child[i]).find("*").hasClass("SimpleToggle")==true){
+        //  console.log( $('.SimpleToggle').childNodes())  
+  
+        // }
+        // setting the colour and text
         child[i].style.backgroundColor = color;
         $(child[i]).find("*").css("background-color", color);
         $(child[i]).find("*").css("color","#000000" );
         child[i].style.setProperty('background-color',color,'important');
-        //child[i].style.setProperty('cssText','back','important');
-        console.log(child[i]);
+        
 
       }      
     }
