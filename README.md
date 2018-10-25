@@ -1,22 +1,14 @@
 # Bibli
-## NOTE: THIS IS INCOMPLETE CODE. :(
+## NOTE: THIS IS INCOMPLETE CODE. :pensive:
 
-Hey! Love scrolling through Quora?
-But, it pains your eyes?
+A Chrome Extension for Quora!
+So what it does (or will do?) :
 
-I have a solution for you :smile:
+1. Relax your eyes! yay! Changes background to darker shades!
 
-Here is what Bibli will do for you->
+2. Hate those ads? Hmm. Removed. Done. :muscle: :100:
 
-1. Early Morning
-![morning](morn.PNG)
+3. Quora addiction? Found a fix for you :wink:
 
-2.Afternoon or Early Evening
-![night](aft.PNG)
 
-3.Night
-![night](night.PNG)
-
-These was just a demo, Bibli can do much more!
-
-made for the love of Quora :heart_eyes:
+Made for the love of Quora :heart:
