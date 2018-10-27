@@ -8,7 +8,7 @@ So what it does (or will do?) :
 
 2. Hate those ads? Hmm. Removed. Done. :muscle: :100:
 
-3. Quora addiction? Found a fix for you :wink:
+3. Quora addiction? Close the tab automatically after a given time. :wink:
 
 
 Made for the love of Quora :heart:
