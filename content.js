@@ -1,3 +1,9 @@
+// detect the protocol
+const PROTOCOL = window.location.protocol;
+
+// settings in local storage
+var storage = chrome.storage.local;
+
 console.log('its working');
 
 var coloraft = '#f7ecd2';
@@ -43,6 +49,7 @@ for(var i=0;i<nodelist.length;++i){
 for(var i=0;i<links.length;++i){
 links[i].style.color = "#000000";
 }
+
 // console.log(document.location.pathname)
 var mutationObserver = new MutationObserver(function(mutations) {
   mutations.forEach(function(mutation) {
@@ -69,7 +76,7 @@ var mutationObserver = new MutationObserver(function(mutations) {
 
         //console.log(child[i])
 
-        $(child[i]).css("border","solid black 2px");
+        $(child[i]).css("border","solid black 1px");
 
         // if($(child[i]).find("*").hasClass("SimpleToggle")==true){
         //  console.log( $('.SimpleToggle').childNodes())  
@@ -95,3 +102,30 @@ mutationObserver.observe(document.documentElement, {
   attributeOldValue: true,
   characterDataOldValue: true
 });
+
+chrome.runtime.onMessage.addListener(dothis);
+
+function dothis(message,sender,sendresponse){
+
+  let nh = message.hour, nm = message.minu;
+
+  let givenTime = ((nh *3600) +(nm*60))*1000;
+  let alertTime = givenTime - 30000;
+  console.log(alertTime)
+
+  // setTimeout(function(){
+
+
+    
+  // },alertTime)
+
+  console.log(message.id)
+
+
+  setTimeout(function(){
+
+    chrome.runtime.sendMessage({closeThis: true});
+    
+  },alertTime)  
+
+}
