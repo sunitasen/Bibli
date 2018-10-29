@@ -1,8 +1,7 @@
 # Bibli
-## NOTE: THIS IS INCOMPLETE CODE. :pensive:
 
 A Chrome Extension for Quora!
-So what it does (or will do?) :
+So what it does:
 
 1. Relax your eyes! yay! Changes background to darker shades!
 
