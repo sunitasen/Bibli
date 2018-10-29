@@ -4,8 +4,11 @@ const PROTOCOL = window.location.protocol;
 // settings in local storage
 var storage = chrome.storage.local;
 
+// silly checking.. lol
 console.log('its working');
 
+
+// different colors for different times of the day
 var coloraft = '#f7ecd2';
 var colormorn = '#e5e0cc';
 var color5 = '#efe3b1';
@@ -16,11 +19,11 @@ var rest = '#ddad5f';
 var color ;
 document.body.style.backgroundColor = color;
 
+// getting date
 var today = new Date();
 var time = Number(today.getHours());
 
-
-//console.log((time));
+// Setting colors.. simple
 if(time>=4 && time<12){
   color = colormorn;
 }else if(time>=12  && time<17){
@@ -37,24 +40,28 @@ if(time>=4 && time<12){
   color = color8;
 }
 
+// get all those static elements. Example the whole background except the cards and text
 var nodelist = document.querySelectorAll("div");
-
 var links  = document.querySelectorAll("a");
 
+// changing color of backgrounds and links of static components
 for(var i=0;i<nodelist.length;++i){
     nodelist[i].style.backgroundColor = color;
     nodelist[i].style.color = "#000000";
   }
   
 for(var i=0;i<links.length;++i){
-links[i].style.color = "#000000";
+  links[i].style.color = "#000000";
 }
 
-// console.log(document.location.pathname)
+//Observe for every card added to the dom -> jquery
 var mutationObserver = new MutationObserver(function(mutations) {
+
   mutations.forEach(function(mutation) {
+
     let value = mutation.target;
     
+    // select all of those cards which appear in the reading area
     if($(value).hasClass("paged_list_wrapper")){
       let save = value;
       let numberofchild = save.childElementCount;
@@ -72,20 +79,13 @@ var mutationObserver = new MutationObserver(function(mutations) {
         ){  
           $(child[i]).remove();
           continue;
-        }
+        }   
 
-        //console.log(child[i])
-
-        $(child[i]).css("border","solid black 1px");
-
-        // if($(child[i]).find("*").hasClass("SimpleToggle")==true){
-        //  console.log( $('.SimpleToggle').childNodes())  
-  
-        // }
-        // setting the colour and text
+        // setting the colour and text and a weird border to every answer card
         child[i].style.backgroundColor = color;
         $(child[i]).find("*").css("background-color", color);
         $(child[i]).find("*").css("color","#000000" );
+        $(child[i]).css("border","solid black 1px");
         child[i].style.setProperty('background-color',color,'important');
         
 
@@ -94,6 +94,8 @@ var mutationObserver = new MutationObserver(function(mutations) {
   });
 });
 
+
+// elements to effect by mutation
 mutationObserver.observe(document.documentElement, {
   attributes: true,
   characterData: true,
@@ -103,27 +105,24 @@ mutationObserver.observe(document.documentElement, {
   characterDataOldValue: true
 });
 
+// recieve the closing time from popup.js
 chrome.runtime.onMessage.addListener(dothis);
 
 function dothis(message,sender,sendresponse){
 
+  // converting all time to seconds
   let nh = message.hour, nm = message.minu;
 
   let givenTime = ((nh *3600) +(nm*60))*1000;
   let alertTime = givenTime - 30000;
   console.log(alertTime)
 
-  // setTimeout(function(){
-
-
-    
-  // },alertTime)
-
   console.log(message.id)
 
 
   setTimeout(function(){
-
+    
+    // send message to popup.js
     chrome.runtime.sendMessage({closeThis: true});
     
   },alertTime)  

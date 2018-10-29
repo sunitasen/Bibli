@@ -3,6 +3,7 @@ var clickFlag = "off";
 
 let hr,min;
 
+//  main event listner 
 document.getElementById("submit").addEventListener("click",function(){
   hr = document.getElementById("hr");
   min = document.getElementById("min");
@@ -10,8 +11,9 @@ document.getElementById("submit").addEventListener("click",function(){
   console.log(min.value)
   
   
-  // console.log(limit.hour)
+  //  this function will send the hour and time values to content.js
   chrome.tabs.query({active:true},function(arr){
+    // created an object to send all data easily
     var limit={
       hour: hr.value,
       minu: min.value,
@@ -20,12 +22,12 @@ document.getElementById("submit").addEventListener("click",function(){
     console.log(arr[0].id)
     chrome.tabs.sendMessage(arr[0].id,limit);
   })
-  // storage.set({"timelimit": timeset}, function(){
-  //   chrome.runtime.sendMessage({"message":timeset})
-  // })
+  
 
 })
 
+
+// will recieve message from content.js
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   if(message.closeThis){
     var opt = {
